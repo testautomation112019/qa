@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -46,5 +47,18 @@ public class QaParameterizedTest extends ConfigJunit {
         assertTrue(text.contains("Hello"));
         assertTrue(number % 5 == 0);
 
+    }
+
+    @ParameterizedTest(name = "Parameterized test with value {0}")
+    @EnumSource(value = ParamEnum.class)
+    public void enumParameterizedTest(ParamEnum enumtype) {
+
+        assertTrue(enumtype.toString().contains("ENUM"));
+
+    }
+
+    enum ParamEnum {
+        ENUM_ONE,
+        ENUM_TWO
     }
 }
