@@ -1,5 +1,6 @@
 package com.jsystems.qa.qajunit;
 
+import org.junit.Before;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -11,8 +12,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Junit tests")
-@Tag("unit")
-public class JunitTest {
+@Tag("UnitTest")
+public class JunitTest extends ConfigJunit {
+
+    @BeforeEach
+    public void setupEach(TestInfo testInfo) {
+        System.out.println("===================BeforeEach===========================");
+        System.out.println(testInfo.getDisplayName());
+        System.out.println(testInfo.getTags());
+        System.out.println(testInfo.getTestMethod());
+    }
+
+    @AfterEach
+    public void tearDownEach() {
+        System.out.println("===================AfterEach===========================");
+    }
 
     final String stringTestowy = "stringTestowy";
 
@@ -25,7 +39,7 @@ public class JunitTest {
         assertTrue(stringTestowy.contains("tr"));
         assertTrue(5 == 2 + 3, "message for test result");
         assertFalse(stringTestowy.contains("z"));
-//        assertThat(stringTestowy).contains("k");
+        assertThat(stringTestowy).contains("k");
         assertThat(stringTestowy).isEqualTo("stringTestowy");
         assertThat(stringTestowy).endsWith("wy");
 
@@ -42,6 +56,7 @@ public class JunitTest {
     }
 
     @Nested
+    @Tag("nested")
     public class NestedTest {
 
         List<Integer> list1 = Arrays.asList(1,2,3,4,5);
