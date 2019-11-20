@@ -2,7 +2,16 @@ package com.jsystems.qa.qagui;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.lang.Thread.sleep;
@@ -12,7 +21,7 @@ public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void frontTest() {
-        driver.get("https://www.wordpress.com/");
+        driver.get("https://wordpress.com/");
         WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
         String text1 = textElement_1.getText();
         assertTrue(text1.equals("WordPress powers"));
@@ -26,61 +35,120 @@ public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void loginTest() {
-        driver.get("https://www.wordpress.com/");
-        WebElement login = driver.findElement(By.xpath("//*[@id=\"lpc-header-nav\"]/div/div/div[1]/header/nav/ul[2]/li[1]/a"));
 
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.navigate().to("https://www.wordpress.com/");
 
-        assertTrue(login.isDisplayed());
-        login.click();
+        String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(loginIconSelector)));
 
-        try {
-            sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebElement loginIcon = driver.findElement(By.cssSelector(loginIconSelector));
+        wait.until(ExpectedConditions.elementToBeClickable(loginIcon));
 
-        WebElement login2 = driver.findElement(By.id("usernameOrEmail"));
-        WebElement button = driver.findElement(By.xpath("//*[@id=\"primary\"]/div/main/div/div[1]/div/form/div[1]/div[2]/button"));
+        loginIcon.click();
 
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String usernameOrEmailSelector = "usernameOrEmail";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
 
-        login2.sendKeys("testautomation112019@wp.pl");
-        button.click();
+        WebElement usernameInput = driver.findElement(By.id(usernameOrEmailSelector));
 
-        try {
-            sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        usernameInput.clear();
+        usernameInput.sendKeys("testautomation112019@wp.pl");
 
-        WebElement password = driver.findElement(By.id("password"));
-        WebElement pwbutton = driver.findElement(By.xpath("//*[@id=\"primary\"]/div/main/div/div[1]/div/form/div[1]/div[2]/button"));
+        String primaryButtonSelector = ".button.form-button.is-primary";
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        WebElement usernameButton = driver.findElement(By.cssSelector(primaryButtonSelector));
+        usernameButton.click();
 
-        password.sendKeys("testautomation");
-        pwbutton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("password")));
+        WebElement inputPassword = driver.findElement(By.id("password"));
 
-        try {
-            sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        inputPassword.clear();
+        inputPassword.sendKeys("testautomation");
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        WebElement buttonPassword = driver.findElement(By.cssSelector(primaryButtonSelector));
+        usernameButton.click();
 
+        String userAvatarSelector = ".masterbar__item.masterbar__item-me";
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
 
+        WebElement userAvatar = driver.findElement(By.cssSelector(userAvatarSelector));
+        userAvatar.click();
 
+        String userDisplayNameSelector = ".profile-gravatar__user-display-name";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
 
+        WebElement userDisplayName = driver.findElement(By.cssSelector(userDisplayNameSelector));
+        String userDisplayNameText = userDisplayName.getText();
 
+        assertThat(userDisplayNameText).isEqualTo("testautomation112019");
 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
+        WebElement saveUserDetailsButton = driver.findElement(By.cssSelector(primaryButtonSelector));
+        assertThat(!saveUserDetailsButton.isDisplayed());
     }
 
+    @Test
+    public void loginTestOnFirefox() {
+        DesiredCapabilities cap = DesiredCapabilities.firefox();
+        cap.setPlatform(Platform.LINUX);
+        cap.setVersion("");
 
+        try {
+            driver = new RemoteWebDriver(new URL("http://192.168.0.20:4444/wd/hub"), cap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        setupDriver();
+
+        driver.get("https://www.wordpress.com/");
+
+        WebElement loginIcon = driver.findElement(By.cssSelector(".x-nav-item.x-nav-item--wide.x-nav-item--logged-in"));
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(loginIcon));
+
+        loginIcon.click();
+
+        String usernameOrEmailSelector = "usernameOrEmail";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
+
+        WebElement usernameInput = driver.findElement(By.id(usernameOrEmailSelector));
+
+        usernameInput.clear();
+        usernameInput.sendKeys("testautomation112019@wp.pl");
+
+        String primaryButtonSelector = ".button.form-button.is-primary";
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        WebElement usernameButton = driver.findElement(By.cssSelector(primaryButtonSelector));
+        usernameButton.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("password")));
+        WebElement inputPassword = driver.findElement(By.id("password"));
+
+        inputPassword.clear();
+        inputPassword.sendKeys("testautomation");
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        WebElement buttonPassword = driver.findElement(By.cssSelector(primaryButtonSelector));
+        usernameButton.click();
+
+        String userAvatarSelector = ".masterbar__item.masterbar__item-me";
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
+
+        WebElement userAvatar = driver.findElement(By.cssSelector(userAvatarSelector));
+        userAvatar.click();
+
+        String userDisplayNameSelector = ".profile-gravatar__user-display-name";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
+
+        WebElement userDisplayName = driver.findElement(By.cssSelector(userDisplayNameSelector));
+        String userDisplayNameText = userDisplayName.getText();
+
+        assertThat(userDisplayNameText).isEqualTo("testautomation112019");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
+        WebElement saveUserDetailsButton = driver.findElement(By.cssSelector(primaryButtonSelector));
+        assertThat(!saveUserDetailsButton.isDisplayed());
+    }
 
 }

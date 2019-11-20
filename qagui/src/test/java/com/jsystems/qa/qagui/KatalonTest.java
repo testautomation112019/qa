@@ -27,7 +27,7 @@ public class KatalonTest {
     public void setUp() throws Exception {
 //        System.setProperty("webdriver.chrome.driver", Paths.get(getClass().getClassLoader().getResource("drivers/chromedriver.exe").toURI()).toFile().getAbsolutePath());
         driver = new ChromeDriver();
-        baseUrl = "https://www.katalon.com/";
+//        baseUrl = "https://www.katalon.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
