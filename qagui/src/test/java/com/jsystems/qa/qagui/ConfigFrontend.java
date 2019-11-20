@@ -4,18 +4,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
@@ -43,13 +36,15 @@ public class ConfigFrontend {
 
     @BeforeEach
     public void setUpEach() throws MalformedURLException {
-//        System.setProperty("webdriver.chrome.driver", chromePath);
-        System.setProperty("webdriver.gecko.driver", fireFoxPath);
+        setupSystemProperties();
 
         driver = new FirefoxDriver();
 
         setupDriver();
-//        DesiredCapabilities cap = DesiredCapabilities.chrome();
+    }
+
+    private void setUpRemote() {
+        //        DesiredCapabilities cap = DesiredCapabilities.chrome();
 //        cap.setPlatform(Platform.LINUX);
 //        cap.setVersion("");
 //
@@ -76,7 +71,7 @@ public class ConfigFrontend {
         System.setProperty("webdriver.gecko.driver", fireFoxPath);
     }
 
-    protected void setupDriver() {
+    private void setupDriver() {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
