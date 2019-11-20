@@ -1,5 +1,6 @@
 package com.jsystems.qa.qagui;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -15,8 +16,10 @@ import java.net.URL;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.lang.Thread.sleep;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("FrontTest")
 public class FrontendTest extends ConfigFrontend {
 
     @Test
@@ -40,6 +43,7 @@ public class FrontendTest extends ConfigFrontend {
 
         String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(loginIconSelector)));
 
         WebElement loginIcon = driver.findElement(By.cssSelector(loginIconSelector));
@@ -85,7 +89,14 @@ public class FrontendTest extends ConfigFrontend {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
         WebElement saveUserDetailsButton = driver.findElement(By.cssSelector(primaryButtonSelector));
-        assertThat(!saveUserDetailsButton.isDisplayed());
+
+        assertTrue(saveUserDetailsButton.isDisplayed());
+        assertFalse(saveUserDetailsButton.isEnabled());
+
+
+//        assertTrue(userDisplayName.isDisplayed());
+//        assertTrue(userDisplayName.isEnabled());
+//        assertThat(userDisplayName.isSelected());
     }
 
 }
