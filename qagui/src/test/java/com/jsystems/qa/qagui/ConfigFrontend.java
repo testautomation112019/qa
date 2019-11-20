@@ -43,11 +43,6 @@ public class ConfigFrontend {
         setupDriver();
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
-
     private void setupSystemProperties() {
 //        System.setProperty("webdriver.chrome.driver", chromePath);
         System.setProperty("webdriver.gecko.driver", fireFoxPath);
@@ -57,6 +52,11 @@ public class ConfigFrontend {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+    }
+
+    @AfterEach
+    public void tearDownEach() {
+        driver.quit();
     }
 
     private void setUpRemote() {
