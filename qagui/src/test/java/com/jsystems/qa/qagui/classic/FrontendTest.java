@@ -18,22 +18,23 @@ import static com.jsystems.qa.qagui.classic.page.UserPage.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Tag("FrontTest")
+//@Tag("FrontTest")
 public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void frontTest() {
+        //given
         driver.get(Configuration.BASE_URL);
 //        WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
         MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
         String text1 = mainWordpressPage.getTextElement_1().getText();
         assertTrue(text1.equals("WordPress powers"));
-
+//when
 //        WebElement textElement_2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
         String text2 = mainWordpressPage.textElement_2.getText();
         assertTrue(text2.contains("% of the internet."));
         assertThat(text2).matches("\\d+(% of the internet.)");
-
+//then
     }
 
     @Test

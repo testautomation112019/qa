@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Tag("FrontTest")
+//@Tag("FrontTest")
 public class ActionTest extends ConfigFrontend {
 
 

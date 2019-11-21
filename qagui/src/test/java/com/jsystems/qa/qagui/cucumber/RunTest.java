@@ -5,7 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.jupiter.api.Tag;
 import org.junit.runner.RunWith;
 
-@Tag("FrontTest")
+//@Tag("FrontTest")
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources",

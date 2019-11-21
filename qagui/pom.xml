@@ -11,9 +11,9 @@
 
     <artifactId>qagui</artifactId>
 
-    <properties>
-        <tags>FrontTest</tags>
-    </properties>
+<!--    <properties>-->
+<!--        <tags>FrontTest</tags>-->
+<!--    </properties>-->
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
