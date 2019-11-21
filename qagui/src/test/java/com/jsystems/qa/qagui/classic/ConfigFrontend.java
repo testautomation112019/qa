@@ -1,16 +1,20 @@
 package com.jsystems.qa.qagui.classic;
 
-import com.jsystems.qa.qagui.Configuration;
+import com.jsystems.qa.qagui.ConfigurationGui;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
@@ -38,18 +42,28 @@ public class ConfigFrontend {
 
     @BeforeEach
     public void setUpEach() throws MalformedURLException {
-        setupSystemProperties();
+
 
 //        driver = new ChromeDriver();
 //        driver = new FirefoxDriver();
 
-        if(Configuration.BROWSER.equals("chrome")) {
-            driver = new ChromeDriver();
-        } else {
-            driver = new FirefoxDriver();
+        if(ConfigurationGui.MACHINE.equals("local")) {
+            setUpLocalDriver();
+        }
+        else {
+            setUpRemoteDriver();
         }
 
         setupDriver();
+    }
+
+    private void setUpLocalDriver() {
+        setupSystemProperties();
+        if(ConfigurationGui.BROWSER.equals("firefox")) {
+            driver = new FirefoxDriver();
+        } else {
+            driver = new ChromeDriver();
+        }
     }
 
     private void setupSystemProperties() {
@@ -68,21 +82,23 @@ public class ConfigFrontend {
         driver.quit();
     }
 
-    private void setUpRemote() {
-        //        DesiredCapabilities cap = DesiredCapabilities.chrome();
-//        cap.setPlatform(Platform.LINUX);
-//        cap.setVersion("");
-//
-//
-//        ChromeOptions options = new ChromeOptions();
-//        options.setCapability("platform", "LINUX");
-//        options.setCapability("browserName", "chrome");
-//        driver = null;
-//        try {
-//            driver = new RemoteWebDriver(new URL("http://10.0.75.1:4444/wd/hub"), cap);
-//        setupDriver();
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
+    private void setUpRemoteDriver() {
+        DesiredCapabilities cap;
+
+        if(ConfigurationGui.BROWSER.equals("firefox")) {
+            cap = DesiredCapabilities.firefox();
+        } else {
+            cap = DesiredCapabilities.chrome();
+        }
+
+        cap.setPlatform(Platform.LINUX);
+        cap.setVersion("");
+
+        driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(ConfigurationGui.REMOTE_URL), cap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }

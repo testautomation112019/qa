@@ -12,7 +12,8 @@
     <artifactId>qagui</artifactId>
 
     <properties>
-        <tags>FrontTest</tags>
+        <tags></tags>
+        <exTags></exTags>
     </properties>
 
     <dependencies>
@@ -77,6 +78,14 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
         </dependency>
     </dependencies>
 

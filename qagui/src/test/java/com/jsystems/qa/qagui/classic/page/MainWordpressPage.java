@@ -24,7 +24,6 @@ public class MainWordpressPage extends BasePage {
 //    public WebElement textElement_2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
 
     public static final String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";
-
     @FindBy(css = loginIconSelector)
     public WebElement loginIcon;
 //    public WebElement loginIcon = driver.findElement(By.cssSelector(loginIconSelector));

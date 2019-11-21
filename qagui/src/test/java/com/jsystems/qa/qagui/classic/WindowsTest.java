@@ -1,7 +1,12 @@
 package com.jsystems.qa.qagui.classic;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,6 +14,7 @@ import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
+@Tag("FrontTest")
 public class WindowsTest extends ConfigFrontend {
 
     @Test
@@ -20,12 +26,14 @@ public class WindowsTest extends ConfigFrontend {
 
         driver.get(contactUrl);
 
+        final String OPEN_WINDOW_LOCATOR = "Open page in a new window";
+
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Open page in a new window")));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.linkText(OPEN_WINDOW_LOCATOR)));
 
         firstPageWindowHandle = driver.getWindowHandle();
 
-        WebElement hyperLinkElement = driver.findElement(By.linkText("Open page in a new window"));
+        WebElement hyperLinkElement = driver.findElement(By.linkText(OPEN_WINDOW_LOCATOR));
 
         int hyperlinkYCoordinate = hyperLinkElement.getLocation().getY();
         int hyperlinkXCoordinate = hyperLinkElement.getLocation().getX();
@@ -40,9 +48,12 @@ public class WindowsTest extends ConfigFrontend {
         }
 
         new WebDriverWait(driver, 100)
-                .until(ExpectedConditions.elementToBeClickable(By.linkText("Open page in a new window")));
+                .until(ExpectedConditions.elementToBeClickable(By.linkText(OPEN_WINDOW_LOCATOR)));
 
         hyperLinkElement.click();
+
+        new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.numberOfWindowsToBe(2));
 
         Set<String> testPageWindowHandle = driver.getWindowHandles();
 
@@ -52,15 +63,8 @@ public class WindowsTest extends ConfigFrontend {
             }
         }
 
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         driver.switchTo().window(secondTestWindowHandle);
-
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("testpagelink")));
 
         driver.switchTo().window(secondTestWindowHandle).close();
@@ -68,7 +72,7 @@ public class WindowsTest extends ConfigFrontend {
         driver.switchTo().window(firstPageWindowHandle);
 
         (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Open page in a new window")));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.linkText(OPEN_WINDOW_LOCATOR)));
 
     }
 
@@ -133,6 +137,7 @@ public class WindowsTest extends ConfigFrontend {
     }
 
     @Test
+    @Disabled
     public void popupHandler(){
         driver.switchTo().alert();
         driver.findElement(By.id("userID")).sendKeys("userName");
@@ -142,6 +147,7 @@ public class WindowsTest extends ConfigFrontend {
     }
 
     @Test
+    @Disabled
     public void alert(){
         String firstWIndow;
         firstWIndow = driver.getWindowHandle();

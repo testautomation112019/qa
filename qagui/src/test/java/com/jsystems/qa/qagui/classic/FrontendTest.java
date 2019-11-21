@@ -1,8 +1,8 @@
 package com.jsystems.qa.qagui.classic;
 
-import com.jsystems.qa.qaapi.model.User;
-import com.jsystems.qa.qaapi.service.UserService;
-import com.jsystems.qa.qagui.Configuration;
+import com.jsystems.qa.qaapi.model.device.User;
+import com.jsystems.qa.qaapi.service.ApiService;
+import com.jsystems.qa.qagui.ConfigurationGui;
 import com.jsystems.qa.qagui.classic.page.LoginPage;
 import com.jsystems.qa.qagui.classic.page.MainWordpressPage;
 import com.jsystems.qa.qagui.classic.page.UserPage;
@@ -15,24 +15,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.jsystems.qa.qaapi.service.UserService.getUsers;
-import static com.jsystems.qa.qagui.classic.page.LoginPage.primaryButtonSelector;
 import static com.jsystems.qa.qagui.classic.page.LoginPage.*;
+import static com.jsystems.qa.qagui.classic.page.LoginPage.primaryButtonSelector;
 import static com.jsystems.qa.qagui.classic.page.MainWordpressPage.loginIconSelector;
 import static com.jsystems.qa.qagui.classic.page.UserPage.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//@Tag("FrontTest")
+@Tag("FrontTest")
 public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void frontTest() {
-        List<User> users = UserService.getUsers();
+        List<User> users = ApiService.getUsers();
 
         assertTrue(users.size() > 0);
         //given
-        driver.get(Configuration.BASE_URL);
+        driver.get(ConfigurationGui.BASE_URL);
 //        WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
         MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
         String text1 = mainWordpressPage.getTextElement_1().getText();
@@ -48,7 +47,7 @@ public class FrontendTest extends ConfigFrontend {
     @Test
     public void loginTest() {
 
-        driver.navigate().to(Configuration.BASE_URL);
+        driver.navigate().to(ConfigurationGui.BASE_URL);
         MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
 
 //        String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";
@@ -72,7 +71,7 @@ public class FrontendTest extends ConfigFrontend {
 //        WebElement usernameInput = driver.findElement(By.id(usernameOrEmailSelector));
 
         loginPage.usernameInput.clear();
-        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+        loginPage.usernameInput.sendKeys(ConfigurationGui.LOGIN);
 
 //        String primaryButtonSelector = ".button.form-button.is-primary";
 //        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
@@ -86,7 +85,7 @@ public class FrontendTest extends ConfigFrontend {
 //        WebElement inputPassword = driver.findElement(By.id("password"));
 
         loginPage.inputPassword.clear();
-        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+        loginPage.inputPassword.sendKeys(ConfigurationGui.PASSWORD);
 
 //        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
         loginPage.waitForElementToBeClickable(By.cssSelector(primaryButtonSelector));
@@ -109,7 +108,7 @@ public class FrontendTest extends ConfigFrontend {
 //        WebElement userDisplayName = driver.findElement(By.cssSelector(userDisplayNameSelector));
         String userDisplayNameText = userPage.userDisplayName.getText();
 
-        assertThat(userDisplayNameText).isEqualTo(Configuration.LOGIN);
+        assertThat(userDisplayNameText).isEqualTo(ConfigurationGui.LOGIN);
 
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(UserPage.primaryButtonSelector)));
         userPage.waitForElementToBeVisibility(By.cssSelector(UserPage.primaryButtonSelector));
@@ -127,7 +126,7 @@ public class FrontendTest extends ConfigFrontend {
     @Test
     public void notificationTest() {
 
-        driver.navigate().to(Configuration.BASE_URL);
+        driver.navigate().to(ConfigurationGui.BASE_URL);
         MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -139,12 +138,12 @@ public class FrontendTest extends ConfigFrontend {
         LoginPage loginPage = new LoginPage(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
         loginPage.usernameInput.clear();
-        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+        loginPage.usernameInput.sendKeys(ConfigurationGui.LOGIN);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
         loginPage.usernameButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.id(passwordInputSelector)));
         loginPage.inputPassword.clear();
-        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+        loginPage.inputPassword.sendKeys(ConfigurationGui.PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
         loginPage.usernameButton.click();
 

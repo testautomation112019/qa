@@ -1,6 +1,6 @@
 package com.jsystems.qa.qagui.cucumber.steps;
 
-import com.jsystems.qa.qagui.Configuration;
+import com.jsystems.qa.qagui.ConfigurationGui;
 import com.jsystems.qa.qagui.classic.page.LoginPage;
 import com.jsystems.qa.qagui.classic.page.MainWordpressPage;
 import com.jsystems.qa.qagui.classic.page.UserPage;
@@ -10,7 +10,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.jsystems.qa.qagui.classic.page.LoginPage.*;
@@ -34,7 +33,7 @@ public class LoginSteps {
 
     @Given("^User starts on main page$")
     public void userStartsOnMainPage() {
-        driver.navigate().to(Configuration.BASE_URL);
+        driver.navigate().to(ConfigurationGui.BASE_URL);
         mainWordpressPage = new MainWordpressPage(driver);
     }
 
@@ -46,12 +45,12 @@ public class LoginSteps {
         loginPage = new LoginPage(driver);
         loginPage.waitForElementToBeVisibility(By.id(usernameOrEmailSelector));
         loginPage.usernameInput.clear();
-        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+        loginPage.usernameInput.sendKeys(ConfigurationGui.LOGIN);
         loginPage.waitForElementToBeClickable(By.cssSelector(primaryButtonSelector));
         loginPage.usernameButton.click();
         loginPage.waitForElementToBeClickable(By.id(passwordInputSelector));
         loginPage.inputPassword.clear();
-        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+        loginPage.inputPassword.sendKeys(ConfigurationGui.PASSWORD);
         loginPage.waitForElementToBeClickable(By.cssSelector(primaryButtonSelector));
         loginPage.usernameButton.click();
         userPage = new UserPage(driver);
