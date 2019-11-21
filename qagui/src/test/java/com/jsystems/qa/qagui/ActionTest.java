@@ -59,6 +59,6 @@ public class ActionTest extends ConfigFrontend {
         do42.sendKeys(Keys.ESCAPE);
         do42.sendKeys("41 + 1");
         do42.sendKeys(Keys.ENTER);
-        do42.perform();
+        do42.build().perform();
     }
 }
