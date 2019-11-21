@@ -1,5 +1,7 @@
 package com.jsystems.qa.qagui.classic;
 
+import com.jsystems.qa.qaapi.model.User;
+import com.jsystems.qa.qaapi.service.UserService;
 import com.jsystems.qa.qagui.Configuration;
 import com.jsystems.qa.qagui.classic.page.LoginPage;
 import com.jsystems.qa.qagui.classic.page.MainWordpressPage;
@@ -10,7 +12,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 import static com.google.common.truth.Truth.assertThat;
+import static com.jsystems.qa.qaapi.service.UserService.getUsers;
 import static com.jsystems.qa.qagui.classic.page.LoginPage.primaryButtonSelector;
 import static com.jsystems.qa.qagui.classic.page.LoginPage.*;
 import static com.jsystems.qa.qagui.classic.page.MainWordpressPage.loginIconSelector;
@@ -23,6 +28,9 @@ public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void frontTest() {
+        List<User> users = UserService.getUsers();
+
+        assertTrue(users.size() > 0);
         //given
         driver.get(Configuration.BASE_URL);
 //        WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
