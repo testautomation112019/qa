@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static jdk.internal.dynalink.support.Guards.isNotNull;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -112,13 +113,6 @@ public class ApiTest {
     }
 
     @Test
-    @Disabled
-    public void dbTest() {
-        UserDb userDb = UserDao.getOneById(1L);
-        assertThat(userDb.getName()).isEqualTo("Piotr");
-    }
-
-    @Test
     @DisplayName("Get azure authors")
     public void shouldReturnsAllAzureAuthorsList() {
 
@@ -141,5 +135,33 @@ public class ApiTest {
     public void postBookTest() {
         Book book = new Book(1, "Jsystems", "Szkolenia", 382, "en", "2019-11-22T09:41:54.400Z");
         BookService.postBook(book, 200);
+    }
+
+    @Test
+//    @Disabled
+    public void dbTest() {
+        UserDb userDb = UserDao.getOneById(1L);
+        assertThat(userDb.getName()).isEqualTo("Piotr");
+    }
+
+    @Test
+    public void getAllUserDb() {
+        List<UserDb> userDbs = UserDao.getAllUsers();
+        System.out.println(userDbs);
+        assertTrue(userDbs.size() > 0);
+    }
+
+    @Test
+    public void saveUserDb() {
+        UserDb userDb = new UserDb(6L, "Arnold", "Kowalski");
+        UserDao.saveUser(userDb);
+
+        UserDb userdb_1 = UserDao.getOneById(6L);
+        assertTrue(userdb_1.getId().equals(userDb.getId()));
+        assertTrue(userdb_1.getName().equals(userDb.getName()));
+        assertTrue(userdb_1.getSurname().equals(userDb.getSurname()));
+
+        UserDao.deleteUser(userdb_1.getId());
+
     }
 }
