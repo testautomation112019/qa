@@ -1,5 +1,6 @@
 package com.jsystems.qa.qaapi.service;
 
+import com.jsystems.qa.qaapi.model.azure.AzureAuthor;
 import com.jsystems.qa.qaapi.model.device.User;
 import com.jsystems.qa.qaapi.model.error.ErrorResponse;
 import com.jsystems.qa.qaapi.model.user.MyUser;
@@ -9,7 +10,7 @@ import io.restassured.RestAssured;
 
 import java.util.List;
 
-public class ApiService {
+public class UserService {
     private static final String USERS_LIST = "/5a6a58222e0000d0377a7789";
     private static final String USER = "/5a6b69ec3100009d211b8aeb";
     private static final String USER_2 = "/5a6b69ec3100009d211b8aeb/{id}/urlsa/{deviceId}";
@@ -44,7 +45,6 @@ public class ApiService {
 //                .queryParam("name", surname)
 //                .get(USER, id, deviceId)
                 .get(USER)
-
                 .then()
                 .assertThat()
                 .statusCode(200)
@@ -63,7 +63,7 @@ public class ApiService {
 //                .queryParam("name", "Piotr")
 //                .queryParam("surname", "Kowalski")
                 .queryParam("name", name)
-                .queryParam("name", surname)
+                .queryParam("surname", surname)
                 .get(USER)
 
                 .then()
@@ -79,7 +79,7 @@ public class ApiService {
         return RestAssured
                 .given()
                 .spec(Specification.requestSpecBuilder())
-//                .get("http://www.mocky.io/v2/5a6b69ec3100009d211b8aeb")
+//    private static final String USER_2 = "/5a6b69ec3100009d211b8aeb/{id}/urlsa/{deviceId}";
                 .get(USER_2, id, deviceId)
                 .then()
                 .assertThat()
@@ -131,6 +131,20 @@ public class ApiService {
                 .extract()
                 .body()
                 .as(UserAzure.class);
+    }
+
+    public static List<AzureAuthor> getAzureAuthors() {
+        return RestAssured.given()
+                .spec(Specification.fakeAzureSpecBuilder())
+                .when()
+                .get("/api/Authors")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("", AzureAuthor.class);
 
     }
 }

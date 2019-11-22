@@ -1,7 +1,7 @@
 package com.jsystems.qa.qagui.classic;
 
 import com.jsystems.qa.qaapi.model.device.User;
-import com.jsystems.qa.qaapi.service.ApiService;
+import com.jsystems.qa.qaapi.service.UserService;
 import com.jsystems.qa.qagui.ConfigurationGui;
 import com.jsystems.qa.qagui.classic.page.LoginPage;
 import com.jsystems.qa.qagui.classic.page.MainWordpressPage;
@@ -27,7 +27,7 @@ public class FrontendTest extends ConfigFrontend {
 
     @Test
     public void frontTest() {
-        List<User> users = ApiService.getUsers();
+        List<User> users = UserService.getUsers();
 
         assertTrue(users.size() > 0);
         //given

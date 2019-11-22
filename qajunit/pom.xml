@@ -13,6 +13,7 @@
 
     <properties>
         <tags>UnitTest</tags>
+        <exTags></exTags>
     </properties>
 
     <artifactId>qajunit</artifactId>
