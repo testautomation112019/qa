@@ -1,7 +1,7 @@
 package com.jsystems.qa.qagui.classic;
 
 import com.jsystems.qa.qaapi.model.device.User;
-import com.jsystems.qa.qaapi.service.UserService;
+import com.jsystems.qa.qaapi.service.user.UserService;
 import com.jsystems.qa.qagui.ConfigurationGui;
 import com.jsystems.qa.qagui.classic.page.LoginPage;
 import com.jsystems.qa.qagui.classic.page.MainWordpressPage;

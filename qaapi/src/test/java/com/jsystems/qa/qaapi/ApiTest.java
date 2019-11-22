@@ -1,13 +1,16 @@
 package com.jsystems.qa.qaapi;
 
 import com.jsystems.qa.qaapi.database.UserDao;
-import com.jsystems.qa.qaapi.model.azure.AzureAuthor;
+import com.jsystems.qa.qaapi.model.azure.author.AzureAuthor;
+import com.jsystems.qa.qaapi.model.azure.book.Book;
 import com.jsystems.qa.qaapi.model.device.User;
 import com.jsystems.qa.qaapi.model.error.ErrorResponse;
 import com.jsystems.qa.qaapi.model.user.MyUser;
 import com.jsystems.qa.qaapi.model.user.UserAzure;
 import com.jsystems.qa.qaapi.model.user.UserDb;
-import com.jsystems.qa.qaapi.service.UserService;
+import com.jsystems.qa.qaapi.service.azure.BookService;
+import com.jsystems.qa.qaapi.service.user.UserService;
+import com.jsystems.qa.qaapi.service.azure.AuthorService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +22,7 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("ApiTest")
@@ -100,7 +104,7 @@ public class ApiTest {
     @Test
     public void azureUser(){
 
-        UserAzure userAzure = UserService.getUserAzureById(1);
+        UserAzure userAzure = AuthorService.getUserAzureById(1);
 
         assertThat(userAzure.id).isEqualTo(1);
         assertThat(userAzure.userName).isEqualTo("User 1");
@@ -117,8 +121,24 @@ public class ApiTest {
     @Test
     @DisplayName("Get azure authors")
     public void shouldReturnsAllAzureAuthorsList() {
-        List<AzureAuthor> azureAuthors = UserService.getAzureAuthors();
+        List<AzureAuthor> azureAuthors = AuthorService.getAzureAuthors();
 
         assertThat(azureAuthors.size()).isGreaterThan(0);
+
+        for (AzureAuthor azureAuthor : azureAuthors) {
+            int firstNameId = Integer.parseInt(azureAuthor.firstName.replace("First Name ", ""));
+            assertThat(azureAuthor.firstName).contains("First Name ");
+            assertThat(azureAuthor.firstName).matches("First Name \\d*");
+            assertTrue(azureAuthor.id == firstNameId);
+
+        }
+
+    }
+
+    @Test
+    @DisplayName("Post Book test")
+    public void postBookTest() {
+        Book book = new Book(1, "Jsystems", "Szkolenia", 382, "en", "2019-11-22T09:41:54.400Z");
+        BookService.postBook(book, 200);
     }
 }

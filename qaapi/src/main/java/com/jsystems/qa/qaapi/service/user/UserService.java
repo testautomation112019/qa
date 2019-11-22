@@ -1,6 +1,6 @@
-package com.jsystems.qa.qaapi.service;
+package com.jsystems.qa.qaapi.service.user;
 
-import com.jsystems.qa.qaapi.model.azure.AzureAuthor;
+import com.jsystems.qa.qaapi.model.azure.author.AzureAuthor;
 import com.jsystems.qa.qaapi.model.device.User;
 import com.jsystems.qa.qaapi.model.error.ErrorResponse;
 import com.jsystems.qa.qaapi.model.user.MyUser;
@@ -117,34 +117,4 @@ public class UserService {
                 .as(ErrorResponse.class);
     }
 
-    public static UserAzure getUserAzureById(long id) {
-        return RestAssured.given()
-                .spec(Specification.fakeAzureSpecBuilder())
-//                .queryParam("name", "Piotr")
-//                .queryParam("surname", "Kowalski")
-                .when()
-                .get("/api/Users/{id}", id)
-                .andReturn()
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .body()
-                .as(UserAzure.class);
-    }
-
-    public static List<AzureAuthor> getAzureAuthors() {
-        return RestAssured.given()
-                .spec(Specification.fakeAzureSpecBuilder())
-                .when()
-                .get("/api/Authors")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .body()
-                .jsonPath()
-                .getList("", AzureAuthor.class);
-
-    }
 }
