@@ -121,6 +121,7 @@ public class ApiTest {
     @Test
     @DisplayName("Get azure authors")
     public void shouldReturnsAllAzureAuthorsList() {
+
         List<AzureAuthor> azureAuthors = AuthorService.getAzureAuthors();
 
         assertThat(azureAuthors.size()).isGreaterThan(0);
