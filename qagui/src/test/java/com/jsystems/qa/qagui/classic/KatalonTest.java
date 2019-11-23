@@ -27,6 +27,7 @@ public class KatalonTest extends ConfigFrontend  {
     }
 
     @Test
+    @Disabled
     public void testUntitledTestCase() throws Exception {
         driver.get("https://wordpress.com/");
         driver.findElement(By.linkText("Log In")).click();

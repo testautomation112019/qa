@@ -138,13 +138,14 @@ public class ApiTest {
     }
 
     @Test
-//    @Disabled
+    @Disabled
     public void dbTest() {
         UserDb userDb = UserDao.getOneById(1L);
         assertThat(userDb.getName()).isEqualTo("Piotr");
     }
 
     @Test
+    @Disabled
     public void getAllUserDb() {
         List<UserDb> userDbs = UserDao.getAllUsers();
         System.out.println(userDbs);
@@ -152,6 +153,7 @@ public class ApiTest {
     }
 
     @Test
+    @Disabled
     public void saveUserDb() {
         UserDb userDb = new UserDb(6L, "Arnold", "Kowalski");
         UserDao.saveUser(userDb);
