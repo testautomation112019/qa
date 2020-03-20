@@ -8,9 +8,9 @@ import com.jsystems.qa.qaapi.model.error.ErrorResponse;
 import com.jsystems.qa.qaapi.model.user.MyUser;
 import com.jsystems.qa.qaapi.model.user.UserAzure;
 import com.jsystems.qa.qaapi.model.user.UserDb;
+import com.jsystems.qa.qaapi.service.azure.AuthorService;
 import com.jsystems.qa.qaapi.service.azure.BookService;
 import com.jsystems.qa.qaapi.service.user.UserService;
-import com.jsystems.qa.qaapi.service.azure.AuthorService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +20,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static jdk.internal.dynalink.support.Guards.isNotNull;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("ApiTest")
