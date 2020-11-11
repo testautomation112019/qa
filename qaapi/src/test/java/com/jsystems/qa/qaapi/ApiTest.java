@@ -100,6 +100,7 @@ public class ApiTest {
         assertThat(errorResponse.error.message).isEqualTo("your email is invalid");
     }
 
+    @Disabled
     @Test
     public void azureUser(){
 
@@ -110,6 +111,7 @@ public class ApiTest {
         assertThat(userAzure.password).isEqualTo("Password1");
     }
 
+    @Disabled
     @Test
     @DisplayName("Get azure authors")
     public void shouldReturnsAllAzureAuthorsList() {
@@ -128,6 +130,7 @@ public class ApiTest {
 
     }
 
+    @Disabled
     @Test
     @DisplayName("Post Book test")
     public void postBookTest() {
