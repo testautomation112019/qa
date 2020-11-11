@@ -13,14 +13,18 @@ public class MainWordpressPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public static final String textElementSelector = "h1.lpc-headline-title span:nth-child(1)";
+    public static final String textElementSelector = "#lpc-titles h1 span:nth-child(1)";
 //    @FindBy(css = "h1.lpc-headline-title span:nth-child(1)")
     @FindBy(css = textElementSelector)
     private WebElement textElement_1;
 //    public WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
 
-    @FindBy(css = "h1.lpc-headline-title span:nth-child(2)")
+    @FindBy(css = "#lpc-titles h1 span:nth-child(2)")
     public WebElement textElement_2;
+//    public WebElement textElement_2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
+
+    @FindBy(css = "#lpc-paragraphs p")
+    public WebElement textElement_3;
 //    public WebElement textElement_2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
 
     public static final String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";

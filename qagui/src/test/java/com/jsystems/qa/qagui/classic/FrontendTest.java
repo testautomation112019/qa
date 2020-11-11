@@ -35,12 +35,14 @@ public class FrontendTest extends ConfigFrontend {
 //        WebElement textElement_1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
         MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
         String text1 = mainWordpressPage.getTextElement_1().getText();
-        assertTrue(text1.equals("WordPress powers"));
+        assertTrue(text1.equals("Welcome to the world’s most"));
 //when
 //        WebElement textElement_2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
         String text2 = mainWordpressPage.textElement_2.getText();
-        assertTrue(text2.contains("% of the internet."));
-        assertThat(text2).matches("\\d+(% of the internet.)");
+        assertTrue(text2.contains("popular website builder."));
+
+        String text3 = mainWordpressPage.textElement_3.getText();
+        assertThat(text3).matches("^\\d+(% .*)");
 //then
     }
 
