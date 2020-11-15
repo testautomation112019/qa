@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 public class BookService {
     private static final String API_BOOKS = "/Books";
 
+
     public static void postBook(Book book, int statusCode) {
         RestAssured.given()
                 .spec(Specification.fakeAzureSpecBuilder())

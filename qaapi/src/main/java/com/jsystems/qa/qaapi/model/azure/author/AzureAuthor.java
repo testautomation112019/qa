@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AzureAuthor {
 
+
     @JsonProperty(value = "id", required = true)
     public long id;
 

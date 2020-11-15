@@ -11,6 +11,7 @@ public class AuthorService {
     private static final String API_AUTHORS = "/Authors";
     private static final String API_USERS_ID = "/Users/{id}";
 
+
     public static UserAzure getUserAzureById(long id) {
         return RestAssured.given()
                 .spec(Specification.fakeAzureSpecBuilder())

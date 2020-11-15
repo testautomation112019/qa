@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayName("Api test")
 public class AzureTest {
 
+
     @Test
     public void azureUser(){
 

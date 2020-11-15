@@ -6,6 +6,7 @@ public class UserAzure {
     @JsonProperty(value = "id")
     public int id;
 
+
     @JsonProperty(value = "userName")
     public String userName;
 
