@@ -74,6 +74,7 @@ public class ConfigStepCucumber {
     private void setDriver() {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
     }
 
