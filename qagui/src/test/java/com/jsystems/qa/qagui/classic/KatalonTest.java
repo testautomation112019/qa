@@ -1,17 +1,14 @@
 package com.jsystems.qa.qagui.classic;
 
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.fail;
-
+@Tag("FrontTest")
 public class KatalonTest extends ConfigFrontend  {
 
     private String baseUrl;

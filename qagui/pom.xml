@@ -12,7 +12,7 @@
     <artifactId>qagui</artifactId>
 
     <properties>
-        <tags>FrontTest</tags>
+        <tags></tags>
         <exTags></exTags>
         <maven-surefire-plugin>2.22.2</maven-surefire-plugin>
         <allure.version>2.13.0</allure.version>
@@ -100,17 +100,17 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

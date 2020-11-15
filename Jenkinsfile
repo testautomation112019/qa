@@ -16,6 +16,7 @@ pipeline {
                         sh "mvn -Dmaven.test.failure.ignore=true clean test"
                         sh "pwd; ls -la"
                         sh "ls -la qagui/target"
+                        sh "cat qagui/target/cucumber.json"
 
                         // To run Maven on a Windows agent, use
                         // bat "mvn -Dmaven.test.failure.ignore=true clean package"
