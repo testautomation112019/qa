@@ -3,12 +3,12 @@ package com.jsystems.qa.qaapi.model.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserAzure {
-    @JsonProperty(value = "ID")
+    @JsonProperty(value = "id")
     public int id;
 
-    @JsonProperty(value = "UserName")
+    @JsonProperty(value = "userName")
     public String userName;
 
-    @JsonProperty(value = "Password")
+    @JsonProperty(value = "password")
     public String password;
 }

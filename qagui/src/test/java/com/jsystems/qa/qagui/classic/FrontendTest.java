@@ -9,6 +9,7 @@ import com.jsystems.qa.qagui.classic.page.UserPage;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -97,7 +98,8 @@ public class FrontendTest extends ConfigFrontend {
         UserPage userPage = new UserPage(driver);
 
 //        String userAvatarSelector = ".masterbar__item.masterbar__item-me";
-//        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userAvatarSelector)));
         userPage.waitForElementToBeClickable(By.cssSelector(userAvatarSelector));
 
 //        WebElement userAvatar = driver.findElement(By.cssSelector(userAvatarSelector));

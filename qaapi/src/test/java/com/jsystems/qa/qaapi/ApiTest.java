@@ -100,53 +100,13 @@ public class ApiTest {
         assertThat(errorResponse.error.message).isEqualTo("your email is invalid");
     }
 
-    @Disabled
     @Test
-    public void azureUser(){
-
-        UserAzure userAzure = AuthorService.getUserAzureById(1);
-
-        assertThat(userAzure.id).isEqualTo(1);
-        assertThat(userAzure.userName).isEqualTo("User 1");
-        assertThat(userAzure.password).isEqualTo("Password1");
-    }
-
-    @Disabled
-    @Test
-    @DisplayName("Get azure authors")
-    public void shouldReturnsAllAzureAuthorsList() {
-
-        List<AzureAuthor> azureAuthors = AuthorService.getAzureAuthors();
-
-        assertThat(azureAuthors.size()).isGreaterThan(0);
-
-        for (AzureAuthor azureAuthor : azureAuthors) {
-            int firstNameId = Integer.parseInt(azureAuthor.firstName.replace("First Name ", ""));
-            assertThat(azureAuthor.firstName).contains("First Name ");
-            assertThat(azureAuthor.firstName).matches("First Name \\d*");
-            assertTrue(azureAuthor.id == firstNameId);
-
-        }
-
-    }
-
-    @Disabled
-    @Test
-    @DisplayName("Post Book test")
-    public void postBookTest() {
-        Book book = new Book(1, "Jsystems", "Szkolenia", 382, "en", "2019-11-22T09:41:54.400Z");
-        BookService.postBook(book, 200);
-    }
-
-    @Test
-    @Disabled
     public void dbTest() {
         UserDb userDb = UserDao.getOneById(1L);
         assertThat(userDb.getName()).isEqualTo("Piotr");
     }
 
     @Test
-    @Disabled
     public void getAllUserDb() {
         List<UserDb> userDbs = UserDao.getAllUsers();
         System.out.println(userDbs);
@@ -154,7 +114,6 @@ public class ApiTest {
     }
 
     @Test
-    @Disabled
     public void saveUserDb() {
         UserDb userDb = new UserDb(6L, "Arnold", "Kowalski");
         UserDao.saveUser(userDb);

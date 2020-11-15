@@ -4,22 +4,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Book {
 
-    @JsonProperty(value = "ID", required = true)
+    @JsonProperty(value = "id", required = true)
     public long id;
 
-    @JsonProperty(value = "Title", required = true)
+    @JsonProperty(value = "title", required = true)
     public String title;
 
-    @JsonProperty(value = "Description", required = true)
+    @JsonProperty(value = "description", required = true)
     public String description;
 
-    @JsonProperty(value = "PageCount", required = true)
+    @JsonProperty(value = "pageCount", required = true)
     public int pageCount;
 
-    @JsonProperty(value = "Excerpt", required = true)
+    @JsonProperty(value = "excerpt", required = true)
     public String excerpt;
 
-    @JsonProperty(value = "PublishDate", required = true)
+    @JsonProperty(value = "publishDate", required = true)
     public String publishDate;
 
     public Book(long id, String title, String description, int pageCount, String excerpt, String publishDate) {

@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AzureAuthor {
 
-    @JsonProperty(value = "ID", required = true)
+    @JsonProperty(value = "id", required = true)
     public long id;
 
-    @JsonProperty(value = "IDBook", required = true)
+    @JsonProperty(value = "idBook", required = true)
     public long idBook;
 
-    @JsonProperty(value = "FirstName", required = true)
+    @JsonProperty(value = "firstName", required = true)
     public String firstName;
 
-    @JsonProperty(value = "LastName", required = true)
+    @JsonProperty(value = "lastName", required = true)
     public String lastName;
 
 }

@@ -37,11 +37,10 @@ public class ConfigStepCucumber {
     }
 
     @Before
-    public  void setUpAll() {
+    public void setUpAll() {
         System.out.println("=====================@Before Cucumber test");
         WebDriverManager.chromedriver().setup();
     }
-
 
     public WebDriver setUp() {
 

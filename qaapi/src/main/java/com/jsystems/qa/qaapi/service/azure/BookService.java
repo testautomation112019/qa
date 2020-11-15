@@ -5,7 +5,7 @@ import com.jsystems.qa.qaapi.specification.Specification;
 import io.restassured.RestAssured;
 
 public class BookService {
-    private static final String API_BOOKS = "/api/Books";
+    private static final String API_BOOKS = "/Books";
 
     public static void postBook(Book book, int statusCode) {
         RestAssured.given()
